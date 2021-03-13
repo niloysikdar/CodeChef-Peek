@@ -18,8 +18,21 @@ class _HomePageState extends State<HomePage> {
       body: Container(
         child: Stack(
           children: [
-            Center(
-              child: CircularProgressIndicator(),
+            // Center(
+            //   child: CircularProgressIndicator(),
+            // ),
+            Container(
+              margin: EdgeInsets.only(top: 80.0),
+              child: ListView.builder(
+                itemCount: 20,
+                itemBuilder: (context, index) {
+                  return Container(
+                    margin: EdgeInsets.symmetric(vertical: 10.0),
+                    height: 30.0,
+                    color: Colors.black,
+                  );
+                },
+              ),
             ),
             Container(
               alignment: Alignment.topCenter,
