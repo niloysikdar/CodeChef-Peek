@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 class UserModel {
-  final status,
+  final String status,
       rating,
       star,
       highestRating,
@@ -37,21 +35,21 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      status: json["status"],
-      rating: json["rating"],
-      star: json["stars"],
-      highestRating: json["highest_rating"],
-      globalRank: json["global_rank"],
-      countryRank: json["country_rank"],
-      name: json["user_details"]["name"],
-      username: json["user_details"]["username"],
-      country: json["user_details"]["country"],
-      state: json["user_details"]["state"],
-      city: json["user_details"]["city"],
-      studentProf: json["user_details"]["student/professional"],
-      institution: json["user_details"]["institution"],
-      fullySolved: json["fully_solved"]["count"],
-      partiallySolved: json["partially_solved"]["count"],
+      status: json["status"].toString(),
+      rating: json["rating"].toString(),
+      star: json["stars"].toString(),
+      highestRating: json["highest_rating"].toString(),
+      globalRank: json["global_rank"].toString(),
+      countryRank: json["country_rank"].toString(),
+      name: json["user_details"]["name"].toString(),
+      username: json["user_details"]["username"].toString(),
+      country: json["user_details"]["country"].toString(),
+      state: json["user_details"]["state"].toString(),
+      city: json["user_details"]["city"].toString(),
+      studentProf: json["user_details"]["student/professional"].toString(),
+      institution: json["user_details"]["institution"].toString(),
+      fullySolved: json["fully_solved"]["count"].toString(),
+      partiallySolved: json["partially_solved"]["count"].toString(),
     );
   }
 }
