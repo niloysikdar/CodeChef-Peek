@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:codechef/func/getuser.dart';
 import 'package:codechef/models/usermodel.dart';
+import 'package:codechef/screens/userscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -70,7 +71,14 @@ class _HomePageState extends State<HomePage> {
                             try {
                               UserModel userModel =
                                   await getValidUser(response);
-                              print(userModel.userDetails.name);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => UserScreen(
+                                    userModel: userModel,
+                                  ),
+                                ),
+                              );
                             } catch (e) {
                               print(await getInvalidUser(response));
                             }
