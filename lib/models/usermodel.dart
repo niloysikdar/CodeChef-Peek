@@ -22,22 +22,22 @@ class UserModel {
   });
 
   String status;
-  int rating;
+  String rating;
   String stars;
-  int highestRating;
-  int globalRank;
-  int countryRank;
+  String highestRating;
+  String globalRank;
+  String countryRank;
   UserDetails userDetails;
   LlySolved fullySolved;
   LlySolved partiallySolved;
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         status: json["status"],
-        rating: json["rating"],
-        stars: json["stars"],
-        highestRating: json["highest_rating"],
-        globalRank: json["global_rank"],
-        countryRank: json["country_rank"],
+        rating: json["rating"].toString(),
+        stars: json["stars"].toString(),
+        highestRating: json["highest_rating"].toString(),
+        globalRank: json["global_rank"].toString(),
+        countryRank: json["country_rank"].toString(),
         userDetails: UserDetails.fromJson(json["user_details"]),
         fullySolved: LlySolved.fromJson(json["fully_solved"]),
         partiallySolved: LlySolved.fromJson(json["partially_solved"]),
@@ -61,10 +61,10 @@ class LlySolved {
     this.count,
   });
 
-  int count;
+  String count;
 
   factory LlySolved.fromJson(Map<String, dynamic> json) => LlySolved(
-        count: json["count"],
+        count: json["count"].toString(),
       );
 
   Map<String, dynamic> toJson() => {

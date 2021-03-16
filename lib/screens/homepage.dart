@@ -1,7 +1,8 @@
 import 'dart:ui';
-
 import 'package:codechef/func/getuser.dart';
+import 'package:codechef/models/usermodel.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   @override
@@ -62,7 +63,23 @@ class _HomePageState extends State<HomePage> {
                     ),
                     GestureDetector(
                       onTap: () async {
-                        getValidUser(await getResponse("dbdsjbsd"));
+                        try {
+                          http.Response response =
+                              await getResponse(usernamecontroller.text);
+                          if (response.statusCode != 404) {
+                            try {
+                              UserModel userModel =
+                                  await getValidUser(response);
+                              print(userModel.userDetails.name);
+                            } catch (e) {
+                              print(await getInvalidUser(response));
+                            }
+                          } else {
+                            print("Getiing error");
+                          }
+                        } catch (e) {
+                          print("Check your internet connection");
+                        }
                       },
                       child: Container(
                         padding: EdgeInsets.only(left: 8.0),

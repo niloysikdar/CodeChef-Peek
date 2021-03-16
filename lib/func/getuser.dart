@@ -3,8 +3,8 @@ import 'package:codechef/models/usermodel.dart';
 import 'package:http/http.dart' as http;
 
 Future getResponse(String username) async {
-  final String url =
-      "https://cp-api-v1.herokuapp.com/api/codechef/niloy_sikdar";
+  final String url = "https://cp-api-v1.herokuapp.com/api/codechef/" +
+      username.toString().trim();
 
   http.Response response = await http.Client().get(url);
 
