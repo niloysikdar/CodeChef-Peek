@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:codechef/func/getuser.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -6,76 +9,75 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController usernamecontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Codechef",
-          style: TextStyle(),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Codechef",
+            style: TextStyle(),
+          ),
         ),
-      ),
-      body: Container(
-        child: Stack(
-          children: [
-            // Center(
-            //   child: CircularProgressIndicator(),
-            // ),
-            Container(
-              margin: EdgeInsets.only(top: 80.0),
-              child: ListView.builder(
-                itemCount: 20,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(vertical: 10.0),
-                    height: 30.0,
-                    color: Colors.black,
-                  );
-                },
+        body: Container(
+          child: Column(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100),
+                child: Image.asset(
+                  "assets/codechef.jpg",
+                  fit: BoxFit.fill,
+                  height: 120.0,
+                  width: 120.0,
+                ),
               ),
-            ),
-            Container(
-              alignment: Alignment.topCenter,
-              child: Container(
+              Container(
                 decoration: BoxDecoration(
                   color: Colors.black87,
                   borderRadius: BorderRadius.circular(20.0),
                 ),
-                margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 8.0),
-                padding: EdgeInsets.symmetric(vertical: 3.0, horizontal: 10.0),
+                margin: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
+                padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 10.0),
                 child: Row(
                   children: [
                     Expanded(
-                      child: TextField(
-                        onChanged: (val) {},
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Type a message",
-                          hintStyle: TextStyle(
-                            color: Colors.white.withOpacity(0.6),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: TextField(
+                          controller: usernamecontroller,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                          ),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "Enter a topic",
+                            hintStyle: TextStyle(
+                              color: Colors.white.withOpacity(0.6),
+                            ),
                           ),
                         ),
                       ),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () async {
+                        getValidUser(await getResponse("dbdsjbsd"));
+                      },
                       child: Container(
                         padding: EdgeInsets.only(left: 8.0),
                         child: Icon(
-                          Icons.search_rounded,
-                          color: Colors.white,
+                          Icons.search_outlined,
                           size: 36.0,
+                          color: Colors.white,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

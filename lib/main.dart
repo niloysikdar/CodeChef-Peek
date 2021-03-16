@@ -1,4 +1,4 @@
-import 'package:codechef/screens/mainpage.dart';
+import 'package:codechef/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _darkTheme,
-      home: MainPage(),
+      home: HomePage(),
     );
   }
 }
