@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                       onTap: () async {
                         try {
                           http.Response response =
-                              await getResponse(usernamecontroller.text);
+                              await getResponse(usernamecontroller.text.trim());
                           if (response.statusCode != 404) {
                             try {
                               UserModel userModel =
