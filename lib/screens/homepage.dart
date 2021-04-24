@@ -4,6 +4,7 @@ import 'package:codechef/func/getuser.dart';
 import 'package:codechef/models/usermodel.dart';
 import 'package:codechef/screens/userscreen.dart';
 import 'package:codechef/widgets/bottomnavbar.dart';
+import 'package:codechef/widgets/headerlogo.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,9 +25,15 @@ class _HomePageState extends State<HomePage> {
         body: Stack(
           children: [
             bottomNavbar(
+              context: context,
               size: size,
               isHomeActive: true,
               isFavourite: false,
+            ),
+            Column(
+              children: [
+                headerLogo(size: size),
+              ],
             ),
           ],
         ),

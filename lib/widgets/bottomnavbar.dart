@@ -2,9 +2,10 @@ import 'package:codechef/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 Widget bottomNavbar({
+  @required BuildContext context,
   @required Size size,
-  @required isHomeActive,
-  @required isFavourite,
+  @required bool isHomeActive,
+  @required bool isFavourite,
 }) {
   return Positioned(
     bottom: 0,
