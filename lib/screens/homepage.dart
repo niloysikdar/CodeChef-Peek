@@ -23,7 +23,11 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: kdarkbackground,
         body: Stack(
           children: [
-            bottomNavbar(size: size),
+            bottomNavbar(
+              size: size,
+              isHomeActive: true,
+              isFavourite: false,
+            ),
           ],
         ),
       ),
