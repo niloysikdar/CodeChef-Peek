@@ -42,7 +42,6 @@ class UserScreen extends StatelessWidget {
               child: Icon(
                 Icons.star_rounded,
                 size: 35.0,
-                color: klightpurple,
               ),
             ),
           ],
@@ -137,7 +136,6 @@ class DoubleCard extends StatelessWidget {
                   title1,
                   maxLines: 1,
                   style: TextStyle(
-                    color: klightpurple,
                     fontSize: 22.0,
                   ),
                 ),
@@ -175,7 +173,6 @@ class DoubleCard extends StatelessWidget {
                   title2,
                   maxLines: 1,
                   style: TextStyle(
-                    color: klightpurple,
                     fontSize: 22.0,
                   ),
                 ),
@@ -211,7 +208,7 @@ class SingleCard extends StatelessWidget {
       padding: EdgeInsets.all(15.0),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: klightgrey,
+        color: Color(0xff383838),
         borderRadius: BorderRadius.circular(5.0),
       ),
       child: Column(
@@ -220,7 +217,6 @@ class SingleCard extends StatelessWidget {
             title1,
             maxLines: 1,
             style: TextStyle(
-              color: klightpurple,
               fontSize: 22.0,
             ),
           ),
