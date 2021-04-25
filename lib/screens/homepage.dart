@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController usernamecontroller;
+  bool isSearching = false;
 
   @override
   void initState() {
@@ -33,12 +34,14 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        bottomNavigationBar: bottomNavbar(
-          context: context,
-          size: size,
-          isHomeActive: true,
-          isFavourite: false,
-        ),
+        bottomNavigationBar: (!isSearching)
+            ? bottomNavbar(
+                context: context,
+                size: size,
+                isHomeActive: true,
+                isFavourite: false,
+              )
+            : Container(height: 0),
         body: Stack(
           children: [
             SingleChildScrollView(
@@ -54,19 +57,27 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: size.height * 0.1),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       print("Getting user");
-                      getUser(
+                      setState(() {
+                        isSearching = true;
+                      });
+                      await getUser(
                         context: context,
                         username: usernamecontroller.text,
                       );
+                      setState(() {
+                        isSearching = false;
+                      });
                     },
                     child: getButton(size: size),
                   ),
                 ],
               ),
             ),
-            searching(size: size),
+            (isSearching)
+                ? searching(size: size)
+                : Container(height: 0, width: 0),
           ],
         ),
       ),
@@ -109,14 +120,14 @@ class _HomePageState extends State<HomePage> {
           colors: [
             klightbackground,
             klightgreen,
-            kwhite,
+            Colors.white60,
           ],
         ),
         boxShadow: [
           BoxShadow(
             color: klightgreen,
             blurRadius: 0.0,
-            spreadRadius: 2.0,
+            spreadRadius: 1.0,
             offset: Offset(-1, 1),
           )
         ],
@@ -135,7 +146,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget inputField({@required TextEditingController controller}) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       style: TextStyle(
         fontSize: 22,
