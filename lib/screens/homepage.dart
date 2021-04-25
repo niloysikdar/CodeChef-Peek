@@ -3,6 +3,7 @@ import 'package:codechef/constants/colors.dart';
 import 'package:codechef/func/getuser.dart';
 import 'package:codechef/models/usermodel.dart';
 import 'package:codechef/screens/userscreen.dart';
+import 'package:codechef/services/validation.dart';
 import 'package:codechef/widgets/bottomnavbar.dart';
 import 'package:codechef/widgets/headerlogo.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   TextEditingController usernamecontroller;
   bool isSearching = false;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
@@ -58,17 +60,19 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(height: size.height * 0.1),
                   InkWell(
                     onTap: () async {
-                      print("Getting user");
-                      setState(() {
-                        isSearching = true;
-                      });
-                      await getUser(
-                        context: context,
-                        username: usernamecontroller.text,
-                      );
-                      setState(() {
-                        isSearching = false;
-                      });
+                      if (_formKey.currentState.validate()) {
+                        print("Getting user");
+                        setState(() {
+                          isSearching = true;
+                        });
+                        await getUser(
+                          context: context,
+                          username: usernamecontroller.text,
+                        );
+                        setState(() {
+                          isSearching = false;
+                        });
+                      }
                     },
                     child: getButton(size: size),
                   ),
@@ -146,64 +150,69 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget inputField({@required TextEditingController controller}) {
-    return TextFormField(
-      controller: controller,
-      style: TextStyle(
-        fontSize: 22,
-        color: klightwhite,
-      ),
-      cursorColor: klightgreen,
-      decoration: InputDecoration(
-        contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-        hintText: 'Codechef Username',
-        hintStyle: TextStyle(
-          color: Colors.white60,
+    return Form(
+      key: _formKey,
+      child: TextFormField(
+        controller: controller,
+        style: TextStyle(
+          fontSize: 22,
+          color: klightwhite,
         ),
-        errorStyle: TextStyle(
-          color: Colors.red.shade700,
-        ),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: klightgreen,
-            width: 1.0,
+        cursorColor: klightgreen,
+        decoration: InputDecoration(
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+          hintText: 'Codechef Username',
+          hintStyle: TextStyle(
+            color: Colors.white60,
+          ),
+          errorStyle: TextStyle(
+            color: Colors.red.shade700,
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: klightgreen,
+              width: 1.0,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: klightgreen,
+              width: 1.0,
+            ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: klightgreen,
+              width: 1.0,
+            ),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: klightgreen,
+              width: 1.0,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: klightgreen,
+              width: 1.5,
+            ),
+          ),
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: klightgreen,
+              width: 1.0,
+            ),
           ),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: klightgreen,
-            width: 1.0,
-          ),
-        ),
-        disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: klightgreen,
-            width: 1.0,
-          ),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: klightgreen,
-            width: 1.0,
-          ),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: klightgreen,
-            width: 1.5,
-          ),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10),
-          borderSide: BorderSide(
-            color: klightgreen,
-            width: 1.0,
-          ),
-        ),
+        validator: nameValidate,
       ),
     );
   }
