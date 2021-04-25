@@ -61,7 +61,6 @@ class _HomePageState extends State<HomePage> {
                   InkWell(
                     onTap: () async {
                       if (_formKey.currentState.validate()) {
-                        print("Getting user");
                         setState(() {
                           isSearching = true;
                         });
@@ -218,7 +217,10 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-getUser({@required BuildContext context, @required String username}) async {
+getUser({
+  @required BuildContext context,
+  @required String username,
+}) async {
   try {
     http.Response response = await getResponse(username);
     if (response.statusCode != 404) {
@@ -233,12 +235,38 @@ getUser({@required BuildContext context, @required String username}) async {
           ),
         );
       } catch (e) {
-        print(await getInvalidUser(response));
+        String res = await getInvalidUser(response);
+        showalertFunc(context: context, title: res);
       }
     } else {
-      print("Getiing error");
+      showalertFunc(context: context, title: "Error, try again later !");
     }
   } catch (e) {
-    print("Check your internet connection");
+    showalertFunc(context: context, title: "Check your internet connection");
   }
+}
+
+showalertFunc({@required BuildContext context, @required String title}) {
+  showDialog(
+    context: context,
+    builder: (ctx) {
+      return AlertDialog(
+        title: Text(title),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+            child: Text(
+              "Okay",
+              style: TextStyle(
+                color: klightgreen,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ],
+      );
+    },
+  );
 }
