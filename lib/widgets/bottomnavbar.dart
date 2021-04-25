@@ -7,41 +7,35 @@ Widget bottomNavbar({
   @required bool isHomeActive,
   @required bool isFavourite,
 }) {
-  return Positioned(
-    bottom: 0,
-    left: 0,
+  return Container(
     height: size.height * 0.1,
     width: size.width,
-    child: Container(
-      height: size.height * 0.1,
-      width: size.width,
-      decoration: BoxDecoration(
-        color: kblack,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
+    decoration: BoxDecoration(
+      color: kblack,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(30),
+        topRight: Radius.circular(30),
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        navbarItems(
+          size: size,
+          icon: Icons.home_rounded,
+          isActive: isHomeActive,
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          navbarItems(
-            size: size,
-            icon: Icons.home_rounded,
-            isActive: isHomeActive,
-          ),
-          navbarItems(
-            size: size,
-            icon: Icons.favorite_rounded,
-            isActive: isFavourite,
-          ),
-          navbarItems(
-            size: size,
-            icon: Icons.share_rounded,
-            isActive: false,
-          ),
-        ],
-      ),
+        navbarItems(
+          size: size,
+          icon: Icons.favorite_rounded,
+          isActive: isFavourite,
+        ),
+        navbarItems(
+          size: size,
+          icon: Icons.share_rounded,
+          isActive: false,
+        ),
+      ],
     ),
   );
 }

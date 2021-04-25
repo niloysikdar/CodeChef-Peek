@@ -1,3 +1,4 @@
+import 'package:codechef/constants/colors.dart';
 import 'package:codechef/screens/homepage.dart';
 import 'package:flutter/material.dart';
 
@@ -6,9 +7,10 @@ void main() {
 }
 
 ThemeData _darkTheme = ThemeData(
-  accentColor: Colors.blue[900],
+  accentColor: klightgreen,
   brightness: Brightness.dark,
-  primaryColor: Colors.blue[800],
+  primaryColor: klightgreen,
+  scaffoldBackgroundColor: kdarkbackground,
 );
 
 /*ThemeData _lightTheme = ThemeData(
