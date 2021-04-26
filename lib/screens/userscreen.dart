@@ -21,7 +21,7 @@ class _UserScreenState extends State<UserScreen> {
     String rating = widget.userModel.rating;
     String highestRating = widget.userModel.highestRating;
     String starsString = widget.userModel.stars.toString().split("")[0];
-    int stars = int.parse(starsString);
+    int stars = (starsString != "n") ? int.parse(starsString) : 0;
     String globalRank = widget.userModel.globalRank;
     String countryRank = widget.userModel.countryRank;
     String fullySolved = widget.userModel.fullySolved.count;
@@ -70,10 +70,84 @@ class _UserScreenState extends State<UserScreen> {
                   ],
                 ),
               ),
+              SizedBox(height: 25),
+              ratingCard(
+                stars: stars,
+                rating: rating,
+                highestRating: highestRating,
+              ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget ratingCard({
+    @required int stars,
+    @required String rating,
+    @required String highestRating,
+  }) {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.only(top: 5, bottom: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Current Rating",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: klightgreen,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  rating,
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: kwhite,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Container(
+          height: 30,
+          width: 2,
+          color: starcolor(stars: stars),
+        ),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.only(left: 25, top: 5, bottom: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Highest Rating",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: klightgreen,
+                  ),
+                ),
+                SizedBox(height: 5),
+                Text(
+                  highestRating,
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: kwhite,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -113,7 +187,7 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   Color starcolorback({@required int stars}) {
-    if (stars == 1)
+    if (stars == 0 || stars == 1)
       return Colors.grey[200];
     else if (stars == 2)
       return Colors.green[200];
@@ -130,7 +204,7 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   Color starcolor({@required int stars}) {
-    if (stars == 1)
+    if (stars == 0 || stars == 1)
       return Colors.grey;
     else if (stars == 2)
       return Colors.green;
@@ -176,6 +250,7 @@ class _UserScreenState extends State<UserScreen> {
             style: TextStyle(
               fontSize: 25,
               color: kwhite,
+              fontWeight: FontWeight.w600,
             ),
           ),
           SizedBox(height: 8),

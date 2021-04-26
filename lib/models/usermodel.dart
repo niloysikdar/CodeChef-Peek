@@ -34,7 +34,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
         status: json["status"],
         rating: json["rating"].toString(),
-        stars: json["stars"].toString(),
+        stars: (json["stars"].toString()),
         highestRating: json["highest_rating"].toString(),
         globalRank: json["global_rank"].toString(),
         countryRank: json["country_rank"].toString(),
