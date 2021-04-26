@@ -3,234 +3,54 @@ import 'package:codechef/constants/colors.dart';
 import 'package:codechef/models/usermodel.dart';
 import 'package:flutter/material.dart';
 
-class UserScreen extends StatelessWidget {
+class UserScreen extends StatefulWidget {
   final UserModel userModel;
 
   const UserScreen({Key key, this.userModel}) : super(key: key);
+
+  @override
+  _UserScreenState createState() => _UserScreenState();
+}
+
+class _UserScreenState extends State<UserScreen> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    String name = widget.userModel.userDetails.name;
+    String username = widget.userModel.userDetails.username;
+    String rating = widget.userModel.rating;
+    String highestRating = widget.userModel.highestRating;
+    String starsString = widget.userModel.stars.toString().split("")[0];
+    int stars = int.parse(starsString);
+    String globalRank = widget.userModel.globalRank;
+    String countryRank = widget.userModel.countryRank;
+    String fullySolved = widget.userModel.fullySolved.count;
+    String partiallySolved = widget.userModel.partiallySolved.count;
+    String country = widget.userModel.userDetails.country;
+    String state = widget.userModel.userDetails.state;
+    String city = widget.userModel.userDetails.city;
+    String type = widget.userModel.userDetails.studentProfessional;
+    String institution = widget.userModel.userDetails.institution;
+
     return SafeArea(
       child: Scaffold(
-        backgroundColor: kdarkbackground,
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: kdarkbackground,
-          leading: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              color: kdarkbackground,
-              child: Icon(
-                Icons.close,
-                color: Colors.white,
-                size: 33.0,
+        appBar: AppBar(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25),
+          child: Column(
+            children: [
+              Container(
+                height: size.height * 0.2,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(25),
+                  ),
+                  color: Colors.red,
+                ),
               ),
-            ),
-          ),
-          title: Text(
-            "User Details",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 23.0,
-            ),
-          ),
-          actions: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 15.0),
-              color: kdarkbackground,
-              child: Icon(
-                Icons.star_rounded,
-                size: 35.0,
-              ),
-            ),
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            padding: EdgeInsets.only(bottom: 25.0, top: 10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                DoubleCard(
-                  title1: "Name",
-                  value1: userModel.userDetails.name,
-                  title2: "Username",
-                  value2: userModel.userDetails.username,
-                ),
-                DoubleCard(
-                  title1: "Rating",
-                  value1: userModel.rating,
-                  title2: "Stars",
-                  value2: userModel.stars,
-                ),
-                DoubleCard(
-                  title1: "Global Rank",
-                  value1: userModel.globalRank,
-                  title2: "Country Rank",
-                  value2: userModel.countryRank,
-                ),
-                SingleCard(
-                  title1: "Highest Rating",
-                  value1: userModel.highestRating,
-                ),
-                DoubleCard(
-                  title1: "Fully Solved",
-                  value1: userModel.fullySolved.count,
-                  title2: "Partially Solved",
-                  value2: userModel.partiallySolved.count,
-                ),
-                DoubleCard(
-                  title1: "Country",
-                  value1: userModel.userDetails.country,
-                  title2: "State",
-                  value2: userModel.userDetails.state,
-                ),
-                DoubleCard(
-                  title1: "City",
-                  value1: userModel.userDetails.city,
-                  title2: "Type",
-                  value2: userModel.userDetails.studentProfessional,
-                ),
-                SingleCard(
-                  title1: "Institution",
-                  value1: userModel.userDetails.institution,
-                ),
-              ],
-            ),
+            ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class DoubleCard extends StatelessWidget {
-  final String title1, value1, title2, value2;
-
-  const DoubleCard(
-      {Key key, this.title1, this.value1, this.title2, this.value2})
-      : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          flex: 1,
-          child: Container(
-            margin: EdgeInsets.only(
-              left: 10.0,
-              top: 5.0,
-              right: 5.0,
-              bottom: 5.0,
-            ),
-            padding: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              color: Color(0xff383838),
-              borderRadius: BorderRadius.circular(5.0),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AutoSizeText(
-                  title1,
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 22.0,
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                AutoSizeText(
-                  (value1 != null) ? value1 : "NA",
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 21.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 1,
-          child: Container(
-            margin: EdgeInsets.only(
-              left: 5.0,
-              top: 5.0,
-              right: 10.0,
-              bottom: 5.0,
-            ),
-            padding: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              color: Color(0xff383838),
-              borderRadius: BorderRadius.circular(5.0),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                AutoSizeText(
-                  title2,
-                  maxLines: 1,
-                  style: TextStyle(
-                    fontSize: 22.0,
-                  ),
-                ),
-                SizedBox(height: 8.0),
-                AutoSizeText(
-                  (value2 != null) ? value2 : "NA",
-                  maxLines: 1,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 21.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class SingleCard extends StatelessWidget {
-  final String title1, value1;
-
-  const SingleCard({Key key, this.title1, this.value1}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(
-        vertical: 5.0,
-        horizontal: 10.0,
-      ),
-      padding: EdgeInsets.all(15.0),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Color(0xff383838),
-        borderRadius: BorderRadius.circular(5.0),
-      ),
-      child: Column(
-        children: [
-          AutoSizeText(
-            title1,
-            maxLines: 1,
-            style: TextStyle(
-              fontSize: 22.0,
-            ),
-          ),
-          SizedBox(height: 8.0),
-          AutoSizeText(
-            (value1 != null) ? value1 : "NA",
-            textAlign: TextAlign.center,
-            maxLines: 2,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 21.0,
-            ),
-          ),
-        ],
       ),
     );
   }
