@@ -1,7 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:codechef/constants/colors.dart';
 import 'package:codechef/models/usermodel.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class UserScreen extends StatefulWidget {
   final UserModel userModel;
@@ -34,23 +34,142 @@ class _UserScreenState extends State<UserScreen> {
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(),
+        backgroundColor: Colors.grey[900],
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: Icon(
+            Icons.close,
+            color: kwhite,
+          ),
+          elevation: 0,
+        ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.all(25),
           child: Column(
             children: [
               Container(
-                height: size.height * 0.2,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(25),
-                  ),
-                  color: Colors.red,
+                height: size.height * 0.335,
+                width: double.infinity,
+                child: Stack(
+                  children: [
+                    Container(
+                      alignment: Alignment.topCenter,
+                      child: nameCard(
+                        size: size,
+                        name: name,
+                        username: username,
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.bottomCenter,
+                      child: circularProgress(
+                        size: size,
+                        stars: stars,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget circularProgress({
+    @required Size size,
+    @required int stars,
+  }) {
+    return CircularPercentIndicator(
+      radius: size.width * 0.35,
+      animation: true,
+      animationDuration: 1000,
+      lineWidth: 17.0,
+      percent: (stars / 7),
+      center: Container(
+        height: size.width * 0.35 - 33,
+        width: size.width * 0.35 - 33,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(100),
+          ),
+          color: kwhite,
+        ),
+        child: Center(
+          child: Text(
+            stars.toString() + "★",
+            style: TextStyle(
+              fontSize: size.width * 0.085,
+              color: starcolor(stars: stars),
+            ),
+          ),
+        ),
+      ),
+      circularStrokeCap: CircularStrokeCap.butt,
+      backgroundColor: kwhite,
+      progressColor: starcolor(stars: stars),
+    );
+  }
+
+  Color starcolor({@required int stars}) {
+    if (stars == 1)
+      return Colors.grey;
+    else if (stars == 2)
+      return Colors.green;
+    else if (stars == 3)
+      return Colors.blue;
+    else if (stars == 4)
+      return Colors.purple;
+    else if (stars == 5)
+      return Colors.yellow[700];
+    else if (stars == 6)
+      return Colors.orange;
+    else
+      return Colors.red;
+  }
+
+  Widget nameCard({
+    @required Size size,
+    @required String name,
+    @required String username,
+  }) {
+    return Container(
+      height: size.height * 0.25,
+      width: double.infinity,
+      padding: EdgeInsets.all(22),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(25),
+        ),
+        gradient: LinearGradient(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topRight,
+          colors: [
+            draculaorchid,
+            americanriver,
+          ],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            name,
+            style: TextStyle(
+              fontSize: 25,
+              color: kwhite,
+            ),
+          ),
+          SizedBox(height: 8),
+          Text(
+            username,
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.grey[350],
+            ),
+          ),
+        ],
       ),
     );
   }
