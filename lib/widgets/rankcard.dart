@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:codechef/constants/colors.dart';
 import 'package:codechef/services/starscolor.dart';
 import 'package:flutter/material.dart';
@@ -12,14 +13,6 @@ Widget rankCard({
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Text(
-        //   "User Ranks",
-        //   style: TextStyle(
-        //     color: klightgreen,
-        //     fontSize: 25,
-        //     fontWeight: FontWeight.w600,
-        //   ),
-        // ),
         Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(vertical: 5),
@@ -53,13 +46,20 @@ Widget rankCard({
                     ),
                   ),
                   SizedBox(height: 5),
-                  Text(
-                    globalRank,
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                      color: klightwhite,
-                    ),
+                  AnimatedTextKit(
+                    animatedTexts: [
+                      WavyAnimatedText(
+                        globalRank,
+                        textStyle: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600,
+                          color: klightwhite,
+                        ),
+                        speed: Duration(milliseconds: 250),
+                      ),
+                    ],
+                    pause: Duration(milliseconds: 2500),
+                    repeatForever: true,
                   ),
                 ],
               ),
@@ -83,13 +83,20 @@ Widget rankCard({
                     ),
                   ),
                   SizedBox(height: 5),
-                  Text(
-                    countryRank,
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w600,
-                      color: klightwhite,
-                    ),
+                  AnimatedTextKit(
+                    animatedTexts: [
+                      WavyAnimatedText(
+                        countryRank,
+                        textStyle: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.w600,
+                          color: klightwhite,
+                        ),
+                        speed: Duration(milliseconds: 250),
+                      ),
+                    ],
+                    pause: Duration(milliseconds: 2500),
+                    repeatForever: true,
                   ),
                 ],
               ),
