@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:codechef/constants/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -26,21 +27,35 @@ Widget nameCard({
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          name,
-          style: TextStyle(
-            fontSize: 25,
-            color: kwhite,
-            fontWeight: FontWeight.w600,
-          ),
+        AnimatedTextKit(
+          animatedTexts: [
+            TyperAnimatedText(
+              name,
+              textStyle: TextStyle(
+                fontSize: 25,
+                color: kwhite,
+                fontWeight: FontWeight.w600,
+              ),
+              speed: Duration(milliseconds: 150),
+              curve: Curves.easeInExpo,
+            ),
+          ],
+          isRepeatingAnimation: false,
         ),
         SizedBox(height: 8),
-        Text(
-          username,
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.grey[350],
-          ),
+        AnimatedTextKit(
+          animatedTexts: [
+            TyperAnimatedText(
+              username,
+              textStyle: TextStyle(
+                fontSize: 20,
+                color: Colors.grey[350],
+              ),
+              speed: Duration(milliseconds: 150),
+              curve: Curves.easeInExpo,
+            ),
+          ],
+          isRepeatingAnimation: false,
         ),
       ],
     ),

@@ -10,7 +10,9 @@ Widget circularProgress({
   return CircularPercentIndicator(
     radius: size.width * 0.35,
     animation: true,
-    animationDuration: 1000,
+    animationDuration: 3000,
+    restartAnimation: true,
+    curve: Curves.easeInExpo,
     lineWidth: 17.0,
     percent: (stars / 7),
     center: Container(
