@@ -37,48 +37,190 @@ class _UserScreenState extends State<UserScreen> {
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          leading: Icon(
-            Icons.close,
-            color: kwhite,
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.close,
+              color: kwhite,
+            ),
           ),
           elevation: 0,
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(25),
-          child: Column(
-            children: [
-              Container(
-                height: size.height * 0.335,
-                width: double.infinity,
-                child: Stack(
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(25),
+            child: Column(
+              children: [
+                Container(
+                  height: size.height * 0.335,
+                  width: double.infinity,
+                  child: Stack(
+                    children: [
+                      Container(
+                        alignment: Alignment.topCenter,
+                        child: nameCard(
+                          size: size,
+                          name: name,
+                          username: username,
+                        ),
+                      ),
+                      Container(
+                        alignment: Alignment.bottomCenter,
+                        child: circularProgress(
+                          size: size,
+                          stars: stars,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 25),
+                ratingCard(
+                  stars: stars,
+                  rating: rating,
+                  highestRating: highestRating,
+                ),
+                SizedBox(height: 20),
+                spacerLine(stars: stars),
+                SizedBox(height: 20),
+                rankCard(
+                  stars: stars,
+                  globalRank: globalRank,
+                  countryRank: countryRank,
+                ),
+                SizedBox(height: 20),
+                spacerLine(stars: stars),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget spacerLine({@required int stars}) {
+    return Container(
+      height: 2,
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(horizontal: 80),
+      color: starcolor(stars: stars),
+    );
+  }
+
+  Widget rankCard({
+    @required int stars,
+    @required String globalRank,
+    @required String countryRank,
+  }) {
+    return Container(
+      width: double.infinity,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Text(
+          //   "User Ranks",
+          //   style: TextStyle(
+          //     color: klightgreen,
+          //     fontSize: 25,
+          //     fontWeight: FontWeight.w600,
+          //   ),
+          // ),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 5),
+            child: Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: kwhite,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.emoji_events_rounded,
+                      size: 40,
+                      color: starcolor(stars: stars),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 20),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      alignment: Alignment.topCenter,
-                      child: nameCard(
-                        size: size,
-                        name: name,
-                        username: username,
+                    Text(
+                      "Global Rank",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: klightgreen,
                       ),
                     ),
-                    Container(
-                      alignment: Alignment.bottomCenter,
-                      child: circularProgress(
-                        size: size,
-                        stars: stars,
+                    SizedBox(height: 5),
+                    Text(
+                      globalRank,
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
+                        color: klightwhite,
                       ),
                     ),
                   ],
                 ),
-              ),
-              SizedBox(height: 25),
-              ratingCard(
-                stars: stars,
-                rating: rating,
-                highestRating: highestRating,
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+          Container(
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(vertical: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      "Country Rank",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: klightgreen,
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Text(
+                      countryRank,
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w600,
+                        color: klightwhite,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(width: 20),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: kwhite,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(100),
+                    ),
+                  ),
+                  child: Center(
+                    child: Icon(
+                      Icons.emoji_events_rounded,
+                      size: 40,
+                      color: starcolor(stars: stars),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
