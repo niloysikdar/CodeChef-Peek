@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:codechef/constants/colors.dart';
 import 'package:codechef/services/starscolor.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,21 @@ Widget ratingCard({
                 ),
               ),
               SizedBox(height: 5),
-              Text(
-                rating,
-                style: TextStyle(
-                  fontSize: 30,
-                  color: kwhite,
-                  fontWeight: FontWeight.w600,
-                ),
+              AnimatedTextKit(
+                animatedTexts: [
+                  TypewriterAnimatedText(
+                    rating,
+                    textStyle: TextStyle(
+                      fontSize: 30,
+                      color: kwhite,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    cursor: "|",
+                    speed: Duration(milliseconds: 200),
+                  ),
+                ],
+                isRepeatingAnimation: true,
+                totalRepeatCount: 3,
               ),
             ],
           ),
@@ -54,13 +63,21 @@ Widget ratingCard({
                 ),
               ),
               SizedBox(height: 5),
-              Text(
-                highestRating,
-                style: TextStyle(
-                  fontSize: 30,
-                  color: kwhite,
-                  fontWeight: FontWeight.w600,
-                ),
+              AnimatedTextKit(
+                animatedTexts: [
+                  TypewriterAnimatedText(
+                    highestRating,
+                    textStyle: TextStyle(
+                      fontSize: 30,
+                      color: kwhite,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    cursor: "|",
+                    speed: Duration(milliseconds: 200),
+                  ),
+                ],
+                isRepeatingAnimation: true,
+                totalRepeatCount: 3,
               ),
             ],
           ),
