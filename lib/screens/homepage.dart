@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:codechef/constants/colors.dart';
-import 'package:codechef/func/getuser.dart';
 import 'package:codechef/models/usermodel.dart';
 import 'package:codechef/screens/userscreen.dart';
+import 'package:codechef/services/getuser.dart';
 import 'package:codechef/services/validation.dart';
 import 'package:codechef/widgets/bottomnavbar.dart';
 import 'package:codechef/widgets/headerlogo.dart';

@@ -4,8 +4,10 @@ import 'package:codechef/widgets/circularprogress.dart';
 import 'package:codechef/widgets/namecard.dart';
 import 'package:codechef/widgets/rankcard.dart';
 import 'package:codechef/widgets/ratingcard.dart';
+import 'package:codechef/widgets/solveCard.dart';
 import 'package:codechef/widgets/spacerline.dart';
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class UserScreen extends StatefulWidget {
   final UserModel userModel;
@@ -96,6 +98,12 @@ class _UserScreenState extends State<UserScreen> {
                 ),
                 SizedBox(height: 20),
                 spacerLine(stars: stars),
+                SizedBox(height: 20),
+                solveCard(
+                  size: size,
+                  fullySolved: fullySolved,
+                  partiallySolved: partiallySolved,
+                ),
               ],
             ),
           ),
