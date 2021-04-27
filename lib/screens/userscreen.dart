@@ -2,6 +2,7 @@ import 'package:codechef/constants/colors.dart';
 import 'package:codechef/models/usermodel.dart';
 import 'package:codechef/widgets/addressCard.dart';
 import 'package:codechef/widgets/circularprogress.dart';
+import 'package:codechef/widgets/institutionCard.dart';
 import 'package:codechef/widgets/namecard.dart';
 import 'package:codechef/widgets/rankcard.dart';
 import 'package:codechef/widgets/ratingcard.dart';
@@ -111,6 +112,11 @@ class _UserScreenState extends State<UserScreen> {
                   city: (city != null) ? city : "NA",
                   state: (state != null) ? state : "NA",
                   country: (country != null) ? country : "NA",
+                ),
+                SizedBox(height: 20),
+                institutionCard(
+                  type: (type != null) ? type : "NA",
+                  institution: (institution != null) ? institution : "NA",
                 ),
               ],
             ),
