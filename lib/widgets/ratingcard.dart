@@ -81,7 +81,7 @@ Widget ratingCard({
                 isRepeatingAnimation: true,
                 pause: Duration(milliseconds: 2500),
                 repeatForever: false,
-                totalRepeatCount: 3,
+                totalRepeatCount: 2,
               ),
             ],
           ),

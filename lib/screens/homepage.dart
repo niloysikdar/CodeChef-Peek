@@ -54,29 +54,35 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                   ),
                   SizedBox(height: size.height * 0.1),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: inputField(
-                      controller: usernamecontroller,
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 1.0, end: 0.0),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: inputField(
+                        controller: usernamecontroller,
+                      ),
                     ),
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.easeInToLinear,
+                    builder: (context, value, child) {
+                      return Transform.translate(
+                        offset: Offset(-(size.width / 2) * value, 0.0),
+                        child: child,
+                      );
+                    },
                   ),
                   SizedBox(height: size.height * 0.1),
-                  InkWell(
-                    onTap: () async {
-                      if (_formKey.currentState.validate()) {
-                        setState(() {
-                          isSearching = true;
-                        });
-                        await getUser(
-                          context: context,
-                          username: usernamecontroller.text,
-                        );
-                        setState(() {
-                          isSearching = false;
-                        });
-                      }
-                    },
+                  TweenAnimationBuilder<double>(
+                    tween: Tween(begin: 1.0, end: 0.0),
                     child: getButton(size: size),
+                    duration: Duration(milliseconds: 600),
+                    curve: Curves.easeInToLinear,
+                    builder: (context, value, child) {
+                      return Transform.translate(
+                        offset: Offset((size.width / 2) * value, 0.0),
+                        child: child,
+                      );
+                    },
                   ),
                 ],
               ),
@@ -88,6 +94,21 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  serchUser() async {
+    if (_formKey.currentState.validate()) {
+      setState(() {
+        isSearching = true;
+      });
+      await getUser(
+        context: context,
+        username: usernamecontroller.text,
+      );
+      setState(() {
+        isSearching = false;
+      });
+    }
   }
 
   Widget searching({@required Size size}) {
@@ -115,36 +136,41 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget getButton({@required Size size}) {
-    return Container(
-      padding: EdgeInsets.all(10.0),
-      width: size.width * 0.4,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            klightbackground,
-            klightgreen,
-            Colors.white60,
+    return InkWell(
+      onTap: () {
+        serchUser();
+      },
+      child: Container(
+        padding: EdgeInsets.all(10.0),
+        width: size.width * 0.4,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              klightbackground,
+              klightgreen,
+              Colors.white60,
+            ],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: klightgreen.withOpacity(0.6),
+              blurRadius: 0.0,
+              spreadRadius: 1.0,
+              offset: Offset(-1, 1),
+            ),
           ],
         ),
-        boxShadow: [
-          BoxShadow(
-            color: klightgreen.withOpacity(0.6),
-            blurRadius: 0.0,
-            spreadRadius: 1.0,
-            offset: Offset(-1, 1),
-          ),
-        ],
-      ),
-      child: Center(
-        child: Text(
-          "Get Details",
-          style: TextStyle(
-            fontSize: 22,
-            color: Colors.black87,
-            fontWeight: FontWeight.w600,
+        child: Center(
+          child: Text(
+            "Get Details",
+            style: TextStyle(
+              fontSize: 22,
+              color: Colors.black87,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
       ),

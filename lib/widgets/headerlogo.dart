@@ -20,7 +20,7 @@ Widget headerLogo({
           left: (size.width * 0.7) / 2,
           child: TweenAnimationBuilder<double>(
             tween: Tween(begin: 1.0, end: 0.0),
-            duration: Duration(seconds: 2),
+            duration: Duration(milliseconds: 2500),
             curve: Curves.bounceOut,
             child: Container(
               height: size.width * 0.30,
