@@ -49,7 +49,10 @@ class _HomePageState extends State<HomePage> {
             SingleChildScrollView(
               child: Column(
                 children: [
-                  headerLogo(size: size),
+                  headerLogo(
+                    size: size,
+                    context: context,
+                  ),
                   SizedBox(height: size.height * 0.1),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -128,11 +131,11 @@ class _HomePageState extends State<HomePage> {
         ),
         boxShadow: [
           BoxShadow(
-            color: klightgreen,
+            color: klightgreen.withOpacity(0.6),
             blurRadius: 0.0,
             spreadRadius: 1.0,
             offset: Offset(-1, 1),
-          )
+          ),
         ],
       ),
       child: Center(
@@ -166,7 +169,8 @@ class _HomePageState extends State<HomePage> {
             color: Colors.white60,
           ),
           errorStyle: TextStyle(
-            color: Colors.red.shade700,
+            color: Colors.white,
+            fontSize: 15,
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
