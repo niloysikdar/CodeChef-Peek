@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:codechef/constants/colors.dart';
 import 'package:codechef/services/starscolor.dart';
 import 'package:flutter/material.dart';
@@ -46,20 +45,13 @@ Widget rankCard({
                     ),
                   ),
                   SizedBox(height: 5),
-                  AnimatedTextKit(
-                    animatedTexts: [
-                      WavyAnimatedText(
-                        globalRank,
-                        textStyle: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w600,
-                          color: klightwhite,
-                        ),
-                        speed: Duration(milliseconds: 250),
-                      ),
-                    ],
-                    pause: Duration(milliseconds: 2500),
-                    repeatForever: true,
+                  Text(
+                    globalRank,
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                      color: klightwhite,
+                    ),
                   ),
                 ],
               ),
@@ -83,20 +75,13 @@ Widget rankCard({
                     ),
                   ),
                   SizedBox(height: 5),
-                  AnimatedTextKit(
-                    animatedTexts: [
-                      WavyAnimatedText(
-                        countryRank,
-                        textStyle: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.w600,
-                          color: klightwhite,
-                        ),
-                        speed: Duration(milliseconds: 250),
-                      ),
-                    ],
-                    pause: Duration(milliseconds: 2500),
-                    repeatForever: true,
+                  Text(
+                    countryRank,
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w600,
+                      color: klightwhite,
+                    ),
                   ),
                 ],
               ),
