@@ -1,3 +1,5 @@
+import 'package:codechef/screens/favusers_screen.dart';
+import 'package:codechef/services/transitions.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share/share.dart';
@@ -93,7 +95,14 @@ class RadialAnimation extends StatelessWidget {
               buildButton(
                 angle: 270,
                 icon: Icons.favorite_rounded,
-                onPressed: showToast,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    SlideLeftRoute(
+                      page: FavouriteScreen(),
+                    ),
+                  );
+                },
               ),
               buildButton(
                   angle: 340,

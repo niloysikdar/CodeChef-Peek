@@ -44,6 +44,8 @@ class _UserScreenState extends State<UserScreen> {
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
           backgroundColor: Colors.transparent,
+          title: Text("User Profile"),
+          centerTitle: true,
           leading: InkWell(
             onTap: () {
               Navigator.pop(context);

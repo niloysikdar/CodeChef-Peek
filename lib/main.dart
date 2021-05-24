@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _darkTheme,
-      home: FavouriteScreen(),
+      home: HomePage(),
     );
   }
 }

@@ -26,12 +26,21 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
+          title: Text(
+            "Favourite Users",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          centerTitle: true,
           leading: IconButton(
             icon: Icon(
               Icons.arrow_back_rounded,
               color: kwhite,
             ),
             onPressed: () {
+              String finalUsers = json.encode(favusers);
+              FavouritePreferences.setFav(finalUsers);
               Navigator.pop(context);
             },
           ),
@@ -68,8 +77,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   //     );
   //     var map = FavouriteUser.toMap(favouriteUser);
   //     List users = [map, map, map, map, map, map];
-  //     String favusers = json.encode(users);
-  //     FavouritePreferences.setFav(favusers);
+  // String favusers = json.encode(users);
+  // FavouritePreferences.setFav(favusers);
   //   },
   // ),
 
