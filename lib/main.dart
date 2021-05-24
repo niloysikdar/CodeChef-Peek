@@ -1,8 +1,17 @@
+import 'dart:html';
+
 import 'package:codechef/constants/colors.dart';
 import 'package:codechef/screens/homepage.dart';
+import 'package:codechef/services/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
+  await FavouritePreferences.init();
   runApp(MyApp());
 }
 
