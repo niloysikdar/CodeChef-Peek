@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:share/share.dart';
 import 'dart:math';
 import 'package:vector_math/vector_math.dart' show radians;
 
@@ -72,6 +73,9 @@ class RadialAnimation extends StatelessWidget {
   final Animation<double> translation;
   final Animation<double> rotation;
 
+  final String shareLink =
+      "View Codechef Users' stats anonymously with just one click. Download now: https://play.google.com/store/apps/details?id=com.pdfchest.android";
+
   build(context) {
     return AnimatedBuilder(
       animation: controller,
@@ -82,11 +86,10 @@ class RadialAnimation extends StatelessWidget {
             alignment: Alignment.bottomCenter,
             children: [
               buildButton(
-                  angle: 200,
-                  icon: Icons.home_rounded,
-                  onPressed: () {
-                    print("Home");
-                  }),
+                angle: 200,
+                icon: Icons.home_rounded,
+                onPressed: _close,
+              ),
               buildButton(
                 angle: 270,
                 icon: Icons.favorite_rounded,
@@ -96,7 +99,9 @@ class RadialAnimation extends StatelessWidget {
                   angle: 340,
                   icon: Icons.share_rounded,
                   onPressed: () {
-                    print("Share");
+                    Share.share(
+                      shareLink,
+                    );
                   }),
               Transform.scale(
                 scale: scale.value - 1.0,
@@ -160,7 +165,6 @@ class RadialAnimation extends StatelessWidget {
       backgroundColor: Colors.red,
       textColor: Colors.white,
       fontSize: 19,
-      // fontSize: 16.0,
     );
   }
 }
