@@ -8,11 +8,11 @@ class FavouritePreferences {
     preferences = await SharedPreferences.getInstance();
   }
 
-  static Future setFav(List<String> favusers) async {
-    await preferences.setStringList(favkey, favusers);
+  static Future setFav(String favusers) async {
+    await preferences.setString(favkey, favusers);
   }
 
-  static List<String> getFav() {
-    return preferences.getStringList(favkey);
+  static String getFav() {
+    return preferences.getString(favkey);
   }
 }

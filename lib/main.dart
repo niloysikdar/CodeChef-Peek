@@ -1,6 +1,5 @@
-import 'dart:html';
-
 import 'package:codechef/constants/colors.dart';
+import 'package:codechef/screens/favusers_screen.dart';
 import 'package:codechef/screens/homepage.dart';
 import 'package:codechef/services/shared_preferences.dart';
 import 'package:flutter/material.dart';
