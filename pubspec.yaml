@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  http: ^0.12.2
+  http: ^0.13.3
   percent_indicator: ^3.0.1
   animated_text_kit: ^4.2.1
   vector_math: ^2.1.0

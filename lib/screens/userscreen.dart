@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:codechef/constants/colors.dart';
 import 'package:codechef/models/usermodel.dart';
+import 'package:codechef/services/shared_preferences.dart';
 import 'package:codechef/widgets/addressCard.dart';
 import 'package:codechef/widgets/circularprogress.dart';
 import 'package:codechef/widgets/institutionCard.dart';
@@ -20,6 +22,30 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
+  bool isFav = false;
+
+  @override
+  void initState() {
+    super.initState();
+    List favusers = json.decode(FavouritePreferences.getFav());
+    for (var i = 0; i < favusers.length; i++) {
+      if (favusers[i]["username"] == widget.userModel.userDetails.username) {
+        setState(() {
+          isFav = true;
+        });
+        break;
+      }
+    }
+  }
+
+  removeFromFab() {
+    print("Removed");
+  }
+
+  addToFab() {
+    print("Added to fab");
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -44,17 +70,37 @@ class _UserScreenState extends State<UserScreen> {
         backgroundColor: Colors.grey[900],
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          title: Text("User Profile"),
+          title: Text(
+            "User Profile",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
           centerTitle: true,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Icon(
+          leading: IconButton(
+            icon: Icon(
               Icons.arrow_back_rounded,
               color: kwhite,
             ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
+          actions: [
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: IconButton(
+                icon: Icon(
+                  (isFav) ? Icons.favorite : Icons.favorite_border_rounded,
+                  color: (isFav) ? Colors.red : Colors.white,
+                  size: 40,
+                ),
+                onPressed: () {
+                  (isFav) ? removeFromFab() : addToFab();
+                },
+              ),
+            ),
+          ],
           elevation: 0,
         ),
         body: SingleChildScrollView(

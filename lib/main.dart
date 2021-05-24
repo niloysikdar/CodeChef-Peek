@@ -1,5 +1,4 @@
 import 'package:codechef/constants/colors.dart';
-import 'package:codechef/screens/favUsers_screen.dart';
 import 'package:codechef/screens/homepage.dart';
 import 'package:codechef/services/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +13,6 @@ Future<void> main() async {
   runApp(MyApp());
 }
 
-ThemeData _darkTheme = ThemeData(
-  accentColor: klightgreen,
-  brightness: Brightness.dark,
-  primaryColor: klightgreen,
-  scaffoldBackgroundColor: kdarkbackground,
-);
-
 /*ThemeData _lightTheme = ThemeData(
   accentColor: Colors.black,
   brightness: Brightness.light,
@@ -32,7 +24,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: _darkTheme,
+      theme: ThemeData(
+        // textTheme: GoogleFonts.firaSansTextTheme(
+        //   Theme.of(context).textTheme,
+        // ),
+        accentColor: klightgreen,
+        brightness: Brightness.dark,
+        primaryColor: klightgreen,
+        scaffoldBackgroundColor: kdarkbackground,
+      ),
       home: HomePage(),
     );
   }
