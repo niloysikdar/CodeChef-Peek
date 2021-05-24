@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
                 constraints: BoxConstraints(
                   minHeight: 170,
                 ),
-                color: Colors.red,
+                color: Colors.transparent,
                 child: RadialMenubar(),
               )
             : null,
@@ -263,11 +263,6 @@ getUser({
           SlideLeftRoute(
             page: UserScreen(userModel: userModel),
           ),
-          // MaterialPageRoute(
-          //   builder: (context) => UserScreen(
-          //     userModel: userModel,
-          //   ),
-          // ),
         );
       } catch (e) {
         String res = await getInvalidUser(response);
@@ -281,7 +276,10 @@ getUser({
   }
 }
 
-showalertFunc({@required BuildContext context, @required String title}) {
+showalertFunc({
+  @required BuildContext context,
+  @required String title,
+}) {
   showDialog(
     context: context,
     builder: (ctx) {

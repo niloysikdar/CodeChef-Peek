@@ -49,7 +49,7 @@ class _UserScreenState extends State<UserScreen> {
               Navigator.pop(context);
             },
             child: Icon(
-              Icons.close,
+              Icons.arrow_back_rounded,
               color: kwhite,
             ),
           ),

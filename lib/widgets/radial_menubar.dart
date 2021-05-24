@@ -20,6 +20,12 @@ class _RadialMenubarState extends State<RadialMenubar>
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return RadialAnimation(controller: controller);
   }
