@@ -3,9 +3,10 @@ import 'package:codechef/constants/colors.dart';
 import 'package:codechef/models/usermodel.dart';
 import 'package:codechef/screens/userscreen.dart';
 import 'package:codechef/services/getuser.dart';
+import 'package:codechef/services/transitions.dart';
 import 'package:codechef/services/validation.dart';
-import 'package:codechef/widgets/bottomnavbar.dart';
 import 'package:codechef/widgets/headerlogo.dart';
+import 'package:codechef/widgets/radial_menubar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,13 +38,14 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         bottomNavigationBar: (!isSearching)
-            ? bottomNavbar(
-                context: context,
-                size: size,
-                isHomeActive: true,
-                isFavourite: false,
+            ? Container(
+                constraints: BoxConstraints(
+                  minHeight: 170,
+                ),
+                color: Colors.red,
+                child: RadialMenubar(),
               )
-            : Container(height: 0),
+            : null,
         body: Stack(
           children: [
             SingleChildScrollView(
@@ -258,11 +260,14 @@ getUser({
         UserModel userModel = await getValidUser(response);
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (context) => UserScreen(
-              userModel: userModel,
-            ),
+          SlideLeftRoute(
+            page: UserScreen(userModel: userModel),
           ),
+          // MaterialPageRoute(
+          //   builder: (context) => UserScreen(
+          //     userModel: userModel,
+          //   ),
+          // ),
         );
       } catch (e) {
         String res = await getInvalidUser(response);

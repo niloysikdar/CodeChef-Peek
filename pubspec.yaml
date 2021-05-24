@@ -1,6 +1,6 @@
 name: codechef
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
@@ -13,6 +13,7 @@ dependencies:
   http: ^0.12.2
   percent_indicator: ^3.0.1
   animated_text_kit: ^4.2.1
+  vector_math: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -24,7 +25,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-
 
   # fonts:
   #   - family: Schyler
