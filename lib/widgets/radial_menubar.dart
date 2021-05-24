@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:math';
 import 'package:vector_math/vector_math.dart' show radians;
 
@@ -87,11 +88,10 @@ class RadialAnimation extends StatelessWidget {
                     print("Home");
                   }),
               buildButton(
-                  angle: 270,
-                  icon: Icons.favorite_rounded,
-                  onPressed: () {
-                    print("Fav");
-                  }),
+                angle: 270,
+                icon: Icons.favorite_rounded,
+                onPressed: showToast,
+              ),
               buildButton(
                   angle: 340,
                   icon: Icons.share_rounded,
@@ -149,5 +149,18 @@ class RadialAnimation extends StatelessWidget {
 
   _close() {
     controller.reverse();
+  }
+
+  showToast() {
+    Fluttertoast.showToast(
+      msg: "Coming Soon",
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.SNACKBAR,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 19,
+      // fontSize: 16.0,
+    );
   }
 }
