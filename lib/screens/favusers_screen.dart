@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:codechef/constants/colors.dart';
 import 'package:codechef/models/favouriteuser_model.dart';
 import 'package:codechef/services/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -9,37 +10,127 @@ class FavouriteScreen extends StatefulWidget {
 }
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
+  String fav;
+  List favusers;
+
+  @override
+  void initState() {
+    super.initState();
+    fav = FavouritePreferences.getFav();
+    favusers = json.decode(fav);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            ElevatedButton(
-              child: Text("Press"),
-              onPressed: () {
-                FavouriteUser favouriteUser = FavouriteUser(
-                  name: "Niloy Sikdar",
-                  username: "niloy_sikdar",
-                );
-                var map = FavouriteUser.toMap(favouriteUser);
-                List users = [map, map, map];
-                String favusers = json.encode(users);
-                FavouritePreferences.setFav(favusers);
-              },
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_rounded,
+              color: kwhite,
             ),
-            ElevatedButton(
-              child: Text("Get"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          elevation: 0,
+        ),
+        body: ListView.builder(
+          itemCount: favusers.length,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            FavouriteUser favouriteUser = FavouriteUser(
+              username: favusers[index]["username"],
+              name: favusers[index]["name"],
+            );
+            return favCard(
+              name: favouriteUser.name,
+              username: favouriteUser.username,
               onPressed: () {
-                String fav = FavouritePreferences.getFav();
-                List favusers = json.decode(fav);
-                favusers.forEach((user) {
-                  print(user["name"]);
-                });
+                favusers.removeAt(index);
+                setState(() {});
               },
-            ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  // ElevatedButton(
+  //   child: Text("Press"),
+  //   onPressed: () {
+  //     FavouriteUser favouriteUser = FavouriteUser(
+  //       name: "Niloy Sikdar",
+  //       username: "niloy_sikdar",
+  //     );
+  //     var map = FavouriteUser.toMap(favouriteUser);
+  //     List users = [map, map, map, map, map, map];
+  //     String favusers = json.encode(users);
+  //     FavouritePreferences.setFav(favusers);
+  //   },
+  // ),
+
+  Widget favCard({
+    @required String name,
+    @required String username,
+    @required Function onPressed,
+  }) {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+      width: double.infinity,
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(25),
+        ),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            draculaorchid,
+            americanriver,
           ],
         ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: TextStyle(
+                    fontSize: 25,
+                    color: kwhite,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text(
+                  username,
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey[350],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(width: 5),
+          IconButton(
+            icon: Icon(
+              Icons.delete_rounded,
+              color: Colors.red[700],
+              size: 40,
+            ),
+            onPressed: onPressed,
+          )
+        ],
       ),
     );
   }

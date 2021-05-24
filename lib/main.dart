@@ -1,5 +1,5 @@
 import 'package:codechef/constants/colors.dart';
-import 'package:codechef/screens/favusers_screen.dart';
+import 'package:codechef/screens/favUsers_screen.dart';
 import 'package:codechef/screens/homepage.dart';
 import 'package:codechef/services/shared_preferences.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _darkTheme,
-      home: HomePage(),
+      home: FavouriteScreen(),
     );
   }
 }
