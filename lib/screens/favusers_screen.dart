@@ -17,7 +17,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   void initState() {
     super.initState();
     fav = FavouritePreferences.getFav();
-    favusers = json.decode(fav);
+    favusers = json.decode(fav).reversed.toList();
   }
 
   @override
@@ -39,7 +39,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               color: kwhite,
             ),
             onPressed: () {
-              String finalUsers = json.encode(favusers);
+              String finalUsers = json.encode(favusers.reversed.toList());
               FavouritePreferences.setFav(finalUsers);
               Navigator.pop(context);
             },

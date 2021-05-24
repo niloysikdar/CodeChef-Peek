@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:codechef/constants/colors.dart';
+import 'package:codechef/models/favouriteuser_model.dart';
 import 'package:codechef/models/usermodel.dart';
 import 'package:codechef/services/shared_preferences.dart';
 import 'package:codechef/widgets/addressCard.dart';
@@ -23,11 +24,12 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   bool isFav = false;
+  List favusers;
 
   @override
   void initState() {
     super.initState();
-    List favusers = json.decode(FavouritePreferences.getFav());
+    favusers = json.decode(FavouritePreferences.getFav());
     for (var i = 0; i < favusers.length; i++) {
       if (favusers[i]["username"] == widget.userModel.userDetails.username) {
         setState(() {
@@ -43,7 +45,14 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   addToFab() {
-    print("Added to fab");
+    FavouriteUser favouriteUser = FavouriteUser(
+      name: widget.userModel.userDetails.name,
+      username: widget.userModel.userDetails.username,
+    );
+    favusers.add(FavouriteUser.toMap(favouriteUser));
+    FavouritePreferences.setFav(json.encode(favusers));
+    isFav = true;
+    setState(() {});
   }
 
   @override
