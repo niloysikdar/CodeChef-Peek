@@ -17,8 +17,8 @@ dependencies:
   share: ^2.0.1
   fluttertoast: ^8.0.7
   shared_preferences: ^2.0.5
-  cool_alert: ^1.1.0
   google_fonts: ^2.1.0
+  rflutter_alert: ^2.0.2
 
 dev_dependencies:
   flutter_test:

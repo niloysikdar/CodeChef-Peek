@@ -26,9 +26,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // textTheme: GoogleFonts.firaSansTextTheme(
-        //   Theme.of(context).textTheme,
-        // ),
         textTheme: GoogleFonts.firaSansTextTheme(
           Theme.of(context).textTheme,
         ),

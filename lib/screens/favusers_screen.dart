@@ -70,20 +70,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
     );
   }
 
-  // ElevatedButton(
-  //   child: Text("Press"),
-  //   onPressed: () {
-  //     FavouriteUser favouriteUser = FavouriteUser(
-  //       name: "Niloy Sikdar",
-  //       username: "niloy_sikdar",
-  //     );
-  //     var map = FavouriteUser.toMap(favouriteUser);
-  //     List users = [map, map, map, map, map, map];
-  // String favusers = json.encode(users);
-  // FavouritePreferences.setFav(favusers);
-  //   },
-  // ),
-
   Widget favCard({
     @required String name,
     @required String username,

@@ -7,9 +7,14 @@ import 'package:codechef/services/transitions.dart';
 import 'package:codechef/services/validation.dart';
 import 'package:codechef/widgets/headerlogo.dart';
 import 'package:codechef/widgets/radial_menubar.dart';
-import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rflutter_alert/rflutter_alert.dart';
+
+import '../constants/colors.dart';
+import '../constants/colors.dart';
+import '../constants/colors.dart';
+import '../constants/colors.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -273,7 +278,7 @@ getUser({
       showalertFunc(context: context, title: "Error, try again later !");
     }
   } catch (e) {
-    showalertFunc(context: context, title: "Check your internet connection");
+    showalertFunc(context: context, title: "Check your Internet Connection");
   }
 }
 
@@ -281,26 +286,35 @@ showalertFunc({
   @required BuildContext context,
   @required String title,
 }) {
-  showDialog(
+  Alert(
     context: context,
-    builder: (ctx) {
-      return AlertDialog(
-        title: Text(title),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-            child: Text(
-              "Okay",
-              style: TextStyle(
-                color: klightgreen,
-                fontSize: 18,
-              ),
-            ),
+    type: AlertType.error,
+    style: AlertStyle(
+      animationDuration: Duration(milliseconds: 350),
+      animationType: AnimationType.grow,
+      isCloseButton: false,
+      alertBorder: RoundedRectangleBorder(
+        side: BorderSide.none,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      titleStyle: TextStyle(color: Colors.white70),
+      descStyle: TextStyle(color: Colors.white70),
+    ),
+    title: "Error !",
+    desc: title,
+    buttons: [
+      DialogButton(
+        child: Text(
+          "OK",
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
           ),
-        ],
-      );
-    },
-  );
+        ),
+        onPressed: () => Navigator.pop(context),
+        color: klightgreen,
+      ),
+    ],
+  ).show();
 }
