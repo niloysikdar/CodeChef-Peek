@@ -12,6 +12,7 @@ import 'package:codechef/widgets/ratingcard.dart';
 import 'package:codechef/widgets/solveCard.dart';
 import 'package:codechef/widgets/spacerline.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class UserScreen extends StatefulWidget {
   final UserModel userModel;
@@ -44,7 +45,37 @@ class _UserScreenState extends State<UserScreen> {
   }
 
   removeFromFab() {
-    print("Removed");
+    Alert(
+      context: context,
+      type: AlertType.info,
+      style: AlertStyle(
+        animationDuration: Duration(milliseconds: 350),
+        animationType: AnimationType.fromBottom,
+        isCloseButton: false,
+        alertBorder: RoundedRectangleBorder(
+          side: BorderSide.none,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        titleStyle: TextStyle(color: Colors.white70),
+        descStyle: TextStyle(color: Colors.white70),
+      ),
+      title: "Sorry",
+      desc: "Kindly Remove from Favourite Section",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OK",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: klightgreen,
+        ),
+      ],
+    ).show();
   }
 
   addToFab() {
@@ -56,6 +87,37 @@ class _UserScreenState extends State<UserScreen> {
     FavouritePreferences.setFav(json.encode(favusers));
     isFav = true;
     setState(() {});
+    Alert(
+      context: context,
+      type: AlertType.success,
+      style: AlertStyle(
+        animationDuration: Duration(milliseconds: 350),
+        animationType: AnimationType.fromTop,
+        isCloseButton: false,
+        alertBorder: RoundedRectangleBorder(
+          side: BorderSide.none,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        titleStyle: TextStyle(color: Colors.white70),
+        descStyle: TextStyle(color: Colors.white70),
+      ),
+      title: "Success",
+      desc: "User has been added to Favourites",
+      buttons: [
+        DialogButton(
+          child: Text(
+            "OK",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          onPressed: () => Navigator.pop(context),
+          color: klightgreen,
+        ),
+      ],
+    ).show();
   }
 
   @override
