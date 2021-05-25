@@ -63,6 +63,8 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
               animation: animation,
               onPressed: () {
                 removeItem(index);
+                String finalUsers = json.encode(favusers.reversed.toList());
+                FavouritePreferences.setFav(finalUsers);
               },
             );
           },
