@@ -7,6 +7,7 @@ import 'package:codechef/services/transitions.dart';
 import 'package:codechef/services/validation.dart';
 import 'package:codechef/widgets/headerlogo.dart';
 import 'package:codechef/widgets/radial_menubar.dart';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 

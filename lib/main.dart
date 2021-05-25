@@ -3,6 +3,7 @@ import 'package:codechef/screens/homepage.dart';
 import 'package:codechef/services/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         // textTheme: GoogleFonts.firaSansTextTheme(
         //   Theme.of(context).textTheme,
         // ),
+        textTheme: GoogleFonts.firaSansTextTheme(
+          Theme.of(context).textTheme,
+        ),
         accentColor: klightgreen,
         brightness: Brightness.dark,
         primaryColor: klightgreen,
