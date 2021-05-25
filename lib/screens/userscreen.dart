@@ -24,12 +24,15 @@ class UserScreen extends StatefulWidget {
 
 class _UserScreenState extends State<UserScreen> {
   bool isFav = false;
-  List favusers;
+  List favusers = [];
 
   @override
   void initState() {
     super.initState();
-    favusers = json.decode(FavouritePreferences.getFav());
+    String favstring = FavouritePreferences.getFav();
+    if (favstring != null) {
+      favusers = json.decode(favstring);
+    }
     for (var i = 0; i < favusers.length; i++) {
       if (favusers[i]["username"] == widget.userModel.userDetails.username) {
         setState(() {

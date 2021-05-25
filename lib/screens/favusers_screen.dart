@@ -11,13 +11,15 @@ class FavouriteScreen extends StatefulWidget {
 
 class _FavouriteScreenState extends State<FavouriteScreen> {
   String fav;
-  List favusers;
+  List favusers = [];
 
   @override
   void initState() {
     super.initState();
     fav = FavouritePreferences.getFav();
-    favusers = json.decode(fav).reversed.toList();
+    if (fav != null) {
+      favusers = json.decode(fav).reversed.toList();
+    }
   }
 
   @override
