@@ -150,7 +150,6 @@ class RadialAnimation extends StatelessWidget {
           (translation.value) * sin(rad),
         ),
       child: FloatingActionButton(
-        key: ValueKey(angle.toString()),
         child: Icon(icon),
         onPressed: onPressed,
       ),

@@ -12,6 +12,7 @@ class FavouriteScreen extends StatefulWidget {
 class _FavouriteScreenState extends State<FavouriteScreen> {
   String fav;
   List favusers = [];
+  final listKey = GlobalKey<AnimatedListState>();
 
   @override
   void initState() {
@@ -48,20 +49,20 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           ),
           elevation: 0,
         ),
-        body: ListView.builder(
-          itemCount: favusers.length,
+        body: AnimatedList(
+          key: listKey,
+          initialItemCount: favusers.length,
           shrinkWrap: true,
-          itemBuilder: (context, index) {
+          itemBuilder: (context, index, animation) {
             FavouriteUser favouriteUser = FavouriteUser(
-              username: favusers[index]["username"],
               name: favusers[index]["name"],
+              username: favusers[index]["username"],
             );
             return favCard(
-              name: favouriteUser.name,
-              username: favouriteUser.username,
+              favouriteUser: favouriteUser,
+              animation: animation,
               onPressed: () {
-                favusers.removeAt(index);
-                setState(() {});
+                removeItem(index);
               },
             );
           },
@@ -71,64 +72,93 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   }
 
   Widget favCard({
-    @required String name,
-    @required String username,
+    @required FavouriteUser favouriteUser,
+    @required Animation<double> animation,
     @required Function onPressed,
   }) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-      width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 25),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(25),
+    return SlideTransition(
+      key: ValueKey(favouriteUser.username),
+      position: Tween<Offset>(
+        begin: Offset(-1, 0),
+        end: Offset.zero,
+      ).animate(
+        CurvedAnimation(
+          parent: animation,
+          curve: Curves.linear,
         ),
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            draculaorchid,
-            americanriver,
+      ),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(25),
+          ),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              draculaorchid,
+              americanriver,
+            ],
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    favouriteUser.name,
+                    style: TextStyle(
+                      fontSize: 24,
+                      color: kwhite,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 6),
+                  Text(
+                    favouriteUser.username,
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey[350],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(width: 5),
+            IconButton(
+              icon: Icon(
+                Icons.delete_rounded,
+                color: Colors.red[700],
+                size: 40,
+              ),
+              onPressed: onPressed,
+            )
           ],
         ),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  name,
-                  style: TextStyle(
-                    fontSize: 24,
-                    color: kwhite,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 8),
-                Text(
-                  username,
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.grey[350],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(width: 5),
-          IconButton(
-            icon: Icon(
-              Icons.delete_rounded,
-              color: Colors.red[700],
-              size: 40,
-            ),
-            onPressed: onPressed,
-          )
-        ],
+    );
+  }
+
+  void removeItem(int index) {
+    final favouriteUser = FavouriteUser(
+      name: favusers[index]["name"],
+      username: favusers[index]["username"],
+    );
+    favusers.removeAt(index);
+    listKey.currentState.removeItem(
+      index,
+      (context, animation) => favCard(
+        favouriteUser: favouriteUser,
+        animation: animation,
+        onPressed: () {},
       ),
+      duration: Duration(milliseconds: 500),
     );
   }
 }
