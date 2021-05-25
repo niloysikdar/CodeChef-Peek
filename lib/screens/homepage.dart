@@ -8,12 +8,10 @@ import 'package:codechef/services/validation.dart';
 import 'package:codechef/widgets/headerlogo.dart';
 import 'package:codechef/widgets/radial_menubar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../constants/colors.dart';
-import '../constants/colors.dart';
-import '../constants/colors.dart';
 import '../constants/colors.dart';
 
 class HomePage extends StatefulWidget {
@@ -127,16 +125,13 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             height: double.infinity,
             width: double.infinity,
-            color: Colors.grey,
+            color: Colors.grey[700],
           ),
         ),
         Center(
-          child: SizedBox(
-            height: size.width * 0.2,
-            width: size.width * 0.2,
-            child: CircularProgressIndicator(
-              backgroundColor: kblack,
-            ),
+          child: SpinKitFadingCircle(
+            size: size.width * 0.3,
+            color: klightgreen,
           ),
         ),
       ],

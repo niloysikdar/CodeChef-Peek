@@ -1,7 +1,6 @@
 import 'package:codechef/screens/favusers_screen.dart';
 import 'package:codechef/services/transitions.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share/share.dart';
 import 'dart:math';
 import 'package:vector_math/vector_math.dart' show radians;
@@ -151,6 +150,7 @@ class RadialAnimation extends StatelessWidget {
           (translation.value) * sin(rad),
         ),
       child: FloatingActionButton(
+        key: ValueKey(angle.toString()),
         child: Icon(icon),
         onPressed: onPressed,
       ),
@@ -163,17 +163,5 @@ class RadialAnimation extends StatelessWidget {
 
   _close() {
     controller.reverse();
-  }
-
-  showToast() {
-    Fluttertoast.showToast(
-      msg: "Coming Soon",
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.SNACKBAR,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.red,
-      textColor: Colors.white,
-      fontSize: 19,
-    );
   }
 }

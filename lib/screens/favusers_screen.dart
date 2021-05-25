@@ -102,7 +102,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 Text(
                   name,
                   style: TextStyle(
-                    fontSize: 25,
+                    fontSize: 24,
                     color: kwhite,
                     fontWeight: FontWeight.w600,
                   ),

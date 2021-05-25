@@ -15,10 +15,10 @@ dependencies:
   animated_text_kit: ^4.2.1
   vector_math: ^2.1.0
   share: ^2.0.1
-  fluttertoast: ^8.0.7
   shared_preferences: ^2.0.5
   google_fonts: ^2.1.0
   rflutter_alert: ^2.0.2
+  flutter_spinkit: "^4.1.2"
 
 dev_dependencies:
   flutter_test:
