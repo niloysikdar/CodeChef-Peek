@@ -44,7 +44,7 @@ class _UserScreenState extends State<UserScreen> {
     }
   }
 
-  removeFromFab() {
+  void removeFromFab() {
     Alert(
       context: context,
       type: AlertType.info,
@@ -60,7 +60,7 @@ class _UserScreenState extends State<UserScreen> {
         descStyle: TextStyle(color: Colors.white70),
       ),
       title: "Sorry",
-      desc: "Kindly Remove from Favourite Section",
+      desc: "Please remove from Favourite Section",
       buttons: [
         DialogButton(
           child: Text(
@@ -78,7 +78,7 @@ class _UserScreenState extends State<UserScreen> {
     ).show();
   }
 
-  addToFab() {
+  void addToFab() {
     FavouriteUser favouriteUser = FavouriteUser(
       name: widget.userModel.userDetails.name,
       username: widget.userModel.userDetails.username,

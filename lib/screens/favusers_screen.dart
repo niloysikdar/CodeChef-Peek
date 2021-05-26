@@ -148,7 +148,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                       ),
                       SizedBox(height: 6),
                       Text(
-                        "View ➜",
+                        "View  ➜",
                         style: TextStyle(
                           fontSize: 20,
                           color: kwhite,

@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  serchUser() async {
+  void serchUser() async {
     if (_formKey.currentState.validate()) {
       setState(() {
         isSearching = true;
@@ -142,8 +142,8 @@ class _HomePageState extends State<HomePage> {
         serchUser();
       },
       child: Container(
-        padding: EdgeInsets.all(10.0),
-        width: size.width * 0.4,
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 6),
+        width: size.width * 0.45,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: LinearGradient(
@@ -167,6 +167,7 @@ class _HomePageState extends State<HomePage> {
         child: Center(
           child: Text(
             "Get Details",
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 22,
               color: Colors.black87,
