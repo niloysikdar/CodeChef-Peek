@@ -207,7 +207,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       duration: Duration(milliseconds: 500),
     );
     if (favusers.length == 0) {
-      setState(() {});
+      Future.delayed(const Duration(milliseconds: 550), () {
+        setState(() {});
+      });
     }
   }
 
