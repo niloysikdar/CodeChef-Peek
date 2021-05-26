@@ -75,7 +75,7 @@ class RadialAnimation extends StatelessWidget {
   final Animation<double> rotation;
 
   final String shareLink =
-      "View Codechef Users' stats anonymously with just one click. Download now: https://play.google.com/store/apps/details?id=com.pdfchest.android";
+      "View Codechef Users' stats anonymously with just one click. Download now: https://play.google.com/store/apps/details?id=com.codechef.peek.android";
 
   build(context) {
     return AnimatedBuilder(

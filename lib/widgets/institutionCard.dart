@@ -47,14 +47,6 @@ Widget institutionCard({
                   Container(
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      // borderRadius: BorderRadius.all(
-                      //   Radius.circular(100),
-                      // ),
-                      // border: Border.all(
-                      //   color: klightgreen,
-                      //   width: 1,
-                      //   style: BorderStyle.solid,
-                      // ),
                       border: Border(
                         bottom: BorderSide(
                           color: klightgreen,

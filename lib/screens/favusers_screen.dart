@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'package:codechef/constants/colors.dart';
 import 'package:codechef/models/favouriteuser_model.dart';
+import 'package:codechef/screens/homepage.dart';
 import 'package:codechef/services/shared_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class FavouriteScreen extends StatefulWidget {
   @override
@@ -13,6 +15,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   String fav;
   List favusers = [];
   final listKey = GlobalKey<AnimatedListState>();
+  bool isSearching = false;
 
   @override
   void initState() {
@@ -25,6 +28,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -49,25 +53,32 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           ),
           elevation: 0,
         ),
-        body: AnimatedList(
-          key: listKey,
-          initialItemCount: favusers.length,
-          shrinkWrap: true,
-          itemBuilder: (context, index, animation) {
-            FavouriteUser favouriteUser = FavouriteUser(
-              name: favusers[index]["name"],
-              username: favusers[index]["username"],
-            );
-            return favCard(
-              favouriteUser: favouriteUser,
-              animation: animation,
-              onDelete: () {
-                removeItem(index);
-                String finalUsers = json.encode(favusers.reversed.toList());
-                FavouritePreferences.setFav(finalUsers);
+        body: Stack(
+          children: [
+            AnimatedList(
+              key: listKey,
+              initialItemCount: favusers.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index, animation) {
+                FavouriteUser favouriteUser = FavouriteUser(
+                  name: favusers[index]["name"],
+                  username: favusers[index]["username"],
+                );
+                return favCard(
+                  favouriteUser: favouriteUser,
+                  animation: animation,
+                  onDelete: () {
+                    removeItem(index);
+                    String finalUsers = json.encode(favusers.reversed.toList());
+                    FavouritePreferences.setFav(finalUsers);
+                  },
+                );
               },
-            );
-          },
+            ),
+            (isSearching)
+                ? searching(size: size)
+                : Container(height: 0, width: 0),
+          ],
         ),
       ),
     );
@@ -111,9 +122,11 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           children: [
             Expanded(
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  serchUser(favouriteUser.username);
+                },
                 child: Container(
-                  color: Colors.red,
+                  color: Colors.transparent,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -176,6 +189,40 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
         onDelete: () {},
       ),
       duration: Duration(milliseconds: 500),
+    );
+  }
+
+  void serchUser(String username) async {
+    setState(() {
+      isSearching = true;
+    });
+    await getUser(
+      context: context,
+      username: username,
+    );
+    setState(() {
+      isSearching = false;
+    });
+  }
+
+  Widget searching({@required Size size}) {
+    return Stack(
+      children: [
+        Opacity(
+          opacity: 0.7,
+          child: Container(
+            height: double.infinity,
+            width: double.infinity,
+            color: Colors.grey[700],
+          ),
+        ),
+        Center(
+          child: SpinKitFadingCircle(
+            size: size.width * 0.3,
+            color: klightgreen,
+          ),
+        ),
+      ],
     );
   }
 }
