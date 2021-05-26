@@ -10,6 +10,7 @@ import 'package:codechef/widgets/radial_menubar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
+import 'package:in_app_update/in_app_update.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,11 +22,46 @@ class _HomePageState extends State<HomePage> {
   TextEditingController usernamecontroller;
   bool isSearching = false;
   final _formKey = GlobalKey<FormState>();
+  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+
+  AppUpdateInfo _updateInfo;
+
+  Future<void> checkForUpdate() async {
+    InAppUpdate.checkForUpdate().then((info) {
+      setState(() {
+        _updateInfo = info;
+      });
+    }).catchError((e) {
+      showSnack(e.toString());
+    });
+  }
+
+  void showSnack(String text) {
+    if (_scaffoldKey.currentContext != null) {
+      ScaffoldMessenger.of(_scaffoldKey.currentContext)
+          .showSnackBar(SnackBar(content: Text(text)));
+    }
+  }
+
+  onStartUp() async {
+    await checkForUpdate();
+    if (_updateInfo != null &&
+        _updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
+      InAppUpdate.performImmediateUpdate().catchError(
+        (e) => showSnack(e.toString()),
+      );
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     usernamecontroller = TextEditingController();
+    try {
+      onStartUp();
+    } catch (e) {
+      // print(e.toString());
+    }
   }
 
   @override
