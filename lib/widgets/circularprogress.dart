@@ -11,7 +11,7 @@ Widget circularProgress({
     radius: size.width * 0.35,
     animation: true,
     animationDuration: 3000,
-    restartAnimation: true,
+    restartAnimation: false,
     curve: Curves.easeInExpo,
     lineWidth: 17.0,
     percent: (stars / 7),
