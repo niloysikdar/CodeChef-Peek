@@ -11,7 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:in_app_update/in_app_update.dart';
+import 'package:rate_my_app/rate_my_app.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -23,6 +25,8 @@ class _HomePageState extends State<HomePage> {
   bool isSearching = false;
   final _formKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
+  String appurl =
+      "https://play.google.com/store/apps/details?id=com.codechef.peek.android";
 
   AppUpdateInfo _updateInfo;
 
@@ -43,7 +47,7 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  onStartUp() async {
+  checkUpdate() async {
     await checkForUpdate();
     if (_updateInfo != null &&
         _updateInfo.updateAvailability == UpdateAvailability.updateAvailable) {
@@ -53,15 +57,81 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
+  RateMyApp _rateMyApp = RateMyApp(
+    preferencesPrefix: 'rateMyApp_',
+    minDays: 0,
+    minLaunches: 2,
+    remindDays: 2,
+    remindLaunches: 3,
+  );
+
+  _launchPlayStore() async {
+    if (await canLaunch(appurl)) {
+      final bool launchSeccess = await launch(
+        appurl,
+        forceSafariVC: false,
+        universalLinksOnly: true,
+      );
+      if (!launchSeccess) {
+        await launch(appurl, forceSafariVC: true);
+      }
+    }
+  }
+
+  openRating() {
+    _rateMyApp.init().then((_) {
+      if (_rateMyApp.shouldOpenDialog) {
+        _rateMyApp.showStarRateDialog(
+          context,
+          title: "Enjoying CodeChef Peek !",
+          message: "Please leave a rating and review :)",
+          actionsBuilder: (context, stars) {
+            return [
+              TextButton(
+                child: Text(
+                  "OK",
+                  style: TextStyle(
+                    color: klightgreen,
+                    fontSize: 20,
+                  ),
+                ),
+                onPressed: () async {
+                  if (stars >= 3.0) {
+                    _rateMyApp.save();
+                    await _rateMyApp
+                        .callEvent(RateMyAppEventType.rateButtonPressed);
+                    Navigator.pop<RateMyAppDialogButton>(
+                        context, RateMyAppDialogButton.rate);
+                    _launchPlayStore();
+                  } else {
+                    Navigator.pop(context);
+                  }
+                },
+              )
+            ];
+          },
+          ignoreNativeDialog: true,
+          dialogStyle: DialogStyle(
+            titleAlign: TextAlign.center,
+            messageAlign: TextAlign.center,
+            messagePadding: EdgeInsets.only(bottom: 20.0),
+          ),
+          starRatingOptions: StarRatingOptions(),
+        );
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     usernamecontroller = TextEditingController();
     try {
-      onStartUp();
+      checkUpdate();
     } catch (e) {
       // print(e.toString());
     }
+    openRating();
   }
 
   @override

@@ -21,6 +21,8 @@ dependencies:
   flutter_spinkit: "^4.1.2"
   lottie: ^1.0.1
   in_app_update: ^2.0.0
+  rate_my_app: ^1.1.0+1
+  url_launcher: ^6.0.4
 
 dev_dependencies:
   flutter_test:
