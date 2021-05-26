@@ -5,6 +5,7 @@ import 'package:codechef/screens/homepage.dart';
 import 'package:codechef/services/shared_preferences.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lottie/lottie.dart';
 
 class FavouriteScreen extends StatefulWidget {
   @override
@@ -53,33 +54,48 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           ),
           elevation: 0,
         ),
-        body: Stack(
-          children: [
-            AnimatedList(
-              key: listKey,
-              initialItemCount: favusers.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index, animation) {
-                FavouriteUser favouriteUser = FavouriteUser(
-                  name: favusers[index]["name"],
-                  username: favusers[index]["username"],
-                );
-                return favCard(
-                  favouriteUser: favouriteUser,
-                  animation: animation,
-                  onDelete: () {
-                    removeItem(index);
-                    String finalUsers = json.encode(favusers.reversed.toList());
-                    FavouritePreferences.setFav(finalUsers);
-                  },
-                );
-              },
-            ),
-            (isSearching)
-                ? searching(size: size)
-                : Container(height: 0, width: 0),
-          ],
-        ),
+        body: (favusers.length != 0)
+            ? Stack(
+                children: [
+                  AnimatedList(
+                    key: listKey,
+                    initialItemCount: favusers.length,
+                    shrinkWrap: true,
+                    itemBuilder: (context, index, animation) {
+                      FavouriteUser favouriteUser = FavouriteUser(
+                        name: favusers[index]["name"],
+                        username: favusers[index]["username"],
+                      );
+                      return favCard(
+                        favouriteUser: favouriteUser,
+                        animation: animation,
+                        onDelete: () {
+                          removeItem(index);
+                          String finalUsers =
+                              json.encode(favusers.reversed.toList());
+                          FavouritePreferences.setFav(finalUsers);
+                        },
+                      );
+                    },
+                  ),
+                  (isSearching)
+                      ? searching(size: size)
+                      : Container(height: 0, width: 0),
+                ],
+              )
+            : lottieWidget(),
+      ),
+    );
+  }
+
+  Widget lottieWidget() {
+    return Center(
+      child: Lottie.asset(
+        "assets/nothing.json",
+        frameRate: FrameRate(60),
+        animate: true,
+        repeat: true,
+        reverse: false,
       ),
     );
   }
@@ -190,6 +206,9 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       ),
       duration: Duration(milliseconds: 500),
     );
+    if (favusers.length == 0) {
+      setState(() {});
+    }
   }
 
   void serchUser(String username) async {
