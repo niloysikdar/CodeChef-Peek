@@ -28,7 +28,7 @@ Widget headerLogo({
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(500),
                 image: DecorationImage(
-                  image: AssetImage("assets/codechef.jpg"),
+                  image: AssetImage("assets/codechef1.png"),
                   fit: BoxFit.cover,
                   alignment: Alignment.center,
                 ),

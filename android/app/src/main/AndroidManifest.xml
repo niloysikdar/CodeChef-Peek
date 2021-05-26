@@ -2,8 +2,8 @@
     package="com.codechef.peek.android">
   <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="codechef"
-        android:icon="@mipmap/ic_launcher">
+        android:label="CodeChef Peek"
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
