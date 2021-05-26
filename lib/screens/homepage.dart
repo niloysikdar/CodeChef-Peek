@@ -12,8 +12,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart' as http;
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../constants/colors.dart';
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -68,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                         controller: usernamecontroller,
                       ),
                     ),
-                    duration: Duration(milliseconds: 600),
+                    duration: Duration(milliseconds: 1200),
                     curve: Curves.easeInToLinear,
                     builder: (context, value, child) {
                       return Transform.translate(
@@ -81,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                   TweenAnimationBuilder<double>(
                     tween: Tween(begin: 1.0, end: 0.0),
                     child: getButton(size: size),
-                    duration: Duration(milliseconds: 600),
+                    duration: Duration(milliseconds: 1200),
                     curve: Curves.easeInToLinear,
                     builder: (context, value, child) {
                       return Transform.translate(

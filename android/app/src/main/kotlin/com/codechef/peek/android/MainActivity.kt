@@ -1,4 +1,4 @@
-package com.example.codechef
+package com.codechef.peek.android
 
 import io.flutter.embedding.android.FlutterActivity
 

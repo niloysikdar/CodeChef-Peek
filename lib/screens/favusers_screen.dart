@@ -61,7 +61,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
             return favCard(
               favouriteUser: favouriteUser,
               animation: animation,
-              onPressed: () {
+              onDelete: () {
                 removeItem(index);
                 String finalUsers = json.encode(favusers.reversed.toList());
                 FavouritePreferences.setFav(finalUsers);
@@ -76,7 +76,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   Widget favCard({
     @required FavouriteUser favouriteUser,
     @required Animation<double> animation,
-    @required Function onPressed,
+    @required Function onDelete,
   }) {
     return SlideTransition(
       key: ValueKey(favouriteUser.username),
@@ -110,26 +110,41 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    favouriteUser.name,
-                    style: TextStyle(
-                      fontSize: 24,
-                      color: kwhite,
-                      fontWeight: FontWeight.w600,
-                    ),
+              child: InkWell(
+                onTap: () {},
+                child: Container(
+                  color: Colors.red,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        favouriteUser.name,
+                        style: TextStyle(
+                          fontSize: 24,
+                          color: kwhite,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        favouriteUser.username,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.grey[350],
+                        ),
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        "View ➜",
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: kwhite,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(height: 6),
-                  Text(
-                    favouriteUser.username,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.grey[350],
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
             SizedBox(width: 5),
@@ -139,7 +154,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                 color: Colors.red[700],
                 size: 40,
               ),
-              onPressed: onPressed,
+              onPressed: onDelete,
             )
           ],
         ),
@@ -158,7 +173,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       (context, animation) => favCard(
         favouriteUser: favouriteUser,
         animation: animation,
-        onPressed: () {},
+        onDelete: () {},
       ),
       duration: Duration(milliseconds: 500),
     );

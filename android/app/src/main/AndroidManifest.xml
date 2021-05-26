@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.codechef">
+    package="com.codechef.peek.android">
   <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="codechef"
